@@ -1,0 +1,17 @@
+{
+    "name": "danupe/plugin-text",
+    "description": "The Text Plugin",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Danupe\\Plugin\\Text\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=8.0",
+        "danupe/core": "dev-main",
+        "danupe/plugin-database": "dev-main"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
