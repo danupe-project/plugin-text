@@ -15,4 +15,23 @@ class Text extends Model
         'language' => null,
     ];
 
+
+    public function getByLanguageAsArray(string $language = ""): array
+    {
+        $texts = danupe()
+            ->plugin('database', 'database')
+            ->table('texts')
+            ->where([
+                'language',
+                '=',
+                $language
+            ])->all(['`key`', 'text']);
+
+        $data = [];
+        foreach ($texts as $key => $value) {
+            $data[danupe()->data()->get($value, 'key')] = danupe()->data()->get($value, 'text');
+        }
+
+        return $data;
+    }
 }
