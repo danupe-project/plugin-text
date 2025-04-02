@@ -11,7 +11,7 @@ class TextController extends Controller
     public function index($request, $response)
     {
         $texts = new Text();
-        $texts = $texts->orderBy(['id' => 'asc'])->all(['`id`', '`key`', '`text`', '`language`']);
+        $texts = $texts->orderBy(['id' => 'asc'])->all(['`id`', '`key`', '`language`']);
         danupe()->view()->get('plugin-text', 'texts/index', ['texts' => $texts, 'title' => 'texts']);
         return $response;
     }
