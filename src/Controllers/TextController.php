@@ -31,8 +31,7 @@ class TextController extends Controller
         $id = danupe()->input()->get('id');
         $rules = [];
         $rules = array_merge($rules, [
-            'text' => 'required|string',
-            'language' => 'required|string',
+            'text' => 'required|string'
         ]);
 
         $validationResult = $validator->validate(danupe()->input()->all(), $rules);
@@ -60,8 +59,7 @@ class TextController extends Controller
         $validator = new Validate();
         $rules = [
             'key' => 'text|string',
-            'text' => 'text|string',
-            'language' => 'required|string|max:2|min:2',
+            'text' => 'text|string'
         ];
 
         $validationResult = $validator->validate(danupe()->input()->all(), $rules);
