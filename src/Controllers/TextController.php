@@ -10,8 +10,21 @@ class TextController extends Controller
 {
     public function index($request, $response)
     {
-        $texts = new Text();
-        $texts = $texts->orderBy(['id' => 'asc'])->all(['`id`', '`key`', '`language`']);
+        $textData = new Text();
+        $textData = $textData->orderBy(['id' => 'asc'])->all(['`id`', '`key`', '`language`', '`text`']);
+
+        foreach ($textData as $key => $value) {
+            $texts[$key]['id'] = $value['id'];
+            $texts[$key]['key'] = $value['key'];
+            $text = $value['text'];
+            if(strlen($text) > 50) {
+                $texts[$key]['text'] =  substr($text, 0, 50) . '...';
+            }else {
+                $texts[$key]['text'] = $text;
+            }
+            $texts[$key]['language'] = $value['language'];
+        }
+
         danupe()->view()->get('plugin-text', 'texts/index', ['texts' => $texts, 'title' => 'texts']);
         return $response;
     }
