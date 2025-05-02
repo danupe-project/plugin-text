@@ -8,7 +8,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 class TextController extends Controller
 {
-    public function index($request, $response)
+    public function index()
     {
         $textData = new Text();
         $textData = $textData->orderBy(['id' => 'asc'])->all(['`id`', '`key`', '`language`', '`text`']);
@@ -26,18 +26,18 @@ class TextController extends Controller
         }
 
         danupe()->view()->get('plugin-text', 'texts/index', ['texts' => $texts, 'title' => 'texts']);
-        return $response;
+
     }
 
-    public function edit($request, $response, $args)
+    public function edit($args)
     {
         $text = new Text();
         $text = $text->first(danupe()->data()->get($args, 'id'));
         danupe()->view()->get('plugin-text', 'texts/edit', ['text' => $text, 'title' => 'Edit Text']);
-        return $response;
+
     }
 
-    public function update_post(Request $request, Response $response, array $args)
+    public function update_post()
     {
         $validator = new Validate();
 
@@ -60,13 +60,13 @@ class TextController extends Controller
         }
     }
 
-    public function create(Request $request, Response $response)
+    public function create()
     {
         danupe()->view()->get('plugin-text', 'texts/create', ['title' => 'Create']);
-        return $response;
+
     }
 
-    public function create_post(Request $request, Response $response)
+    public function create_post()
     {
 
         $validator = new Validate();
@@ -89,7 +89,7 @@ class TextController extends Controller
         }
     }
 
-    public function delete_post(Request $request, Response $response, array $args)
+    public function delete_post()
     {
         $validator = new Validate();
         $rules = [
