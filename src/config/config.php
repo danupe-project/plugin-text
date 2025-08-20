@@ -16,6 +16,13 @@ return [
             'method' => 'GET',
             'roles' => ['user', 'admin'],
         ],
+        '/' . $prefix . '/texts/table' => [
+            'controller' => 'Danupe\\Plugin\\Text\\Controllers\\TextController',
+            'action' => 'table',
+            'middlewares' => ['auth'],
+            'method' => 'GET',
+            'roles' => ['user','admin'],
+        ],
         '/' . $prefix . '/texts/create' => [
             'controller' => 'Danupe\Plugin\Text\Controllers\TextController',
             'action' => 'create',

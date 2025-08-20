@@ -29,6 +29,48 @@ class TextController extends Controller
 
     }
 
+    public function table()
+    {
+        $db = danupe()->plugin('database','database')->table('texts');
+        $limit = (int) danupe()->input()->get('limit', 10);
+        $offset = (int) danupe()->input()->get('offset', 0);
+        $search = trim((string) danupe()->input()->get('search', ''));
+        $sort = (string) danupe()->input()->get('sort', '');
+
+        if ($search !== '') {
+            $like = '%' . $search . '%';
+            $db->whereRaw('( `key` LIKE :s1 OR `text` LIKE :s2 OR `language` LIKE :s3 )', ['s1'=>$like,'s2'=>$like,'s3'=>$like]);
+        }
+
+        $total = $db->count();
+
+        if ($sort) {
+            [$col,$dir] = array_pad(explode(':',$sort),2,'asc');
+            $whitelist = ['id','key','language'];
+            if (in_array($col,$whitelist)) {
+                $dir = strtolower($dir)==='dsc' ? 'desc':'asc';
+                $db->orderBy([$col=>$dir]);
+            }
+        } else {
+            $db->orderBy(['id'=>'asc']);
+        }
+
+        $rows = $db->offset($offset)->limit($limit)->get();
+
+        $data = [];
+        foreach ($rows as $r) {
+            $textShort = (strlen($r['text']) > 50) ? substr($r['text'],0,50).'...' : $r['text'];
+            $data[] = [
+                'id' => $r['id'],
+                'key' => $r['key'],
+                'text' => $textShort,
+                'language' => $r['language'],
+            ];
+        }
+
+        $this->json(['total'=>$total,'data'=>$data]);
+    }
+
     public function edit($args)
     {
         $text = new Text();
