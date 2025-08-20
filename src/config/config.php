@@ -3,8 +3,8 @@ $prefix = danupe()->plugin('user', 'admin')->getPrefix();
 
 return [
     'navigation' => [
-        '/' . $prefix . '/texts' => ['title' => 'Text', 'icon' => 'fa-solid fa-quote-right', 'sort' => 9000, 'parent' => ''],
-        '/' . $prefix . '/texts/create' => ['title' => 'Create Text', 'icon' => 'fa-solid fa-quote-right', 'sort' => 9001, 'parent' => '/' . $prefix . '/texts'],
+        '/' . $prefix . '/texts' => ['title' => 'Text', 'icon' => 'fa-solid fa-quote-right', 'sort' => 9000, 'parent' => '', 'roles' => ['user','admin']],
+        '/' . $prefix . '/texts/create' => ['title' => 'Create Text', 'icon' => 'fa-solid fa-quote-right', 'sort' => 9001, 'parent' => '/' . $prefix . '/texts', 'roles' => ['user','admin']],
     ],
 
     'routes' => [

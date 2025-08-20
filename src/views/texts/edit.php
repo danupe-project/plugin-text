@@ -24,7 +24,7 @@
 
     <div class="form-group">
         <?php echo danupe()->plugin('user', 'form')->label('language', 'Language'); ?>
-        <?php echo danupe()->plugin('user', 'form')->input('language', '', danupe()->data()->get($text, 'language') ?: danupe()->session()->old('language')); ?>
+        <?php echo danupe()->plugin('user', 'form')->select('language', danupe()->language()->getAllAvailableFrontendLanguageKeys(1), danupe()->data()->get($text, 'language') ?: danupe()->session()->old('language') ?: danupe()->language()->getLocale(), ['class' => 'form-select w-full']); ?>
     </div>
 
     <div class="form-group">
