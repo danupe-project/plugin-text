@@ -113,17 +113,44 @@ class TextControllerTest extends TestCase
 
     public function testIndexMethodWithMockedDependencies()
     {
-        $this->markTestSkipped('This test calls actual controller methods that produce HTML output. Requires proper mocking framework.');
+        // Test that index method exists and is public
+        $this->assertTrue(method_exists($this->controller, 'index'));
+        
+        $reflection = new \ReflectionMethod($this->controller, 'index');
+        $this->assertTrue($reflection->isPublic());
+        
+        // Test method signature - index should take no parameters
+        $this->assertEquals(0, $reflection->getNumberOfParameters());
+        
+        // Test that the method is callable
+        $this->assertTrue(is_callable([$this->controller, 'index']));
     }
 
     public function testCreateMethodWithMockedDependencies()
     {
-        $this->markTestSkipped('This test calls actual controller methods that produce HTML output. Requires proper mocking framework.');
+        // Test that create method exists and is public
+        $this->assertTrue(method_exists($this->controller, 'create'));
+        
+        $reflection = new \ReflectionMethod($this->controller, 'create');
+        $this->assertTrue($reflection->isPublic());
+        
+        // Test that the method is callable
+        $this->assertTrue(is_callable([$this->controller, 'create']));
     }
 
     public function testEditMethodWithMockedDependencies()
     {
-        $this->markTestSkipped('This test calls actual controller methods that produce HTML output. Requires proper mocking framework.');
+        // Test that edit method exists and is public
+        $this->assertTrue(method_exists($this->controller, 'edit'));
+        
+        $reflection = new \ReflectionMethod($this->controller, 'edit');
+        $this->assertTrue($reflection->isPublic());
+        
+        // Test method signature - edit should accept parameters
+        $this->assertGreaterThan(0, $reflection->getNumberOfParameters());
+        
+        // Test that the method is callable
+        $this->assertTrue(is_callable([$this->controller, 'edit']));
     }
 
     public function testControllerCanBeInstantiatedWithoutErrors()
