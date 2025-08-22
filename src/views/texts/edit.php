@@ -7,7 +7,7 @@
 </div>
 
 
-<form method="POST" action="/<?php echo danupe()->env()->get('DANUPE_ADMIN_PREFIX'); ?>/texts/update_post" class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<form method="POST" action="/<?php echo danupe()->env()->get('DANUPE_ADMIN_PREFIX'); ?>/texts/update_post" class="grid grid-cols-1 md:grid-cols-3 gap-4">
 
     <?php echo danupe()->plugin('user', 'form')->csrf(); ?>
     <?php echo danupe()->plugin('user', 'form')->input('id', 'hidden', danupe()->data()->get($text, 'id')); ?>
@@ -26,10 +26,6 @@
         <?php echo danupe()->plugin('user', 'form')->label('language', 'Language'); ?>
         <?php echo danupe()->plugin('user', 'form')->select('language', danupe()->language()->getAllAvailableFrontendLanguageKeys(1), danupe()->data()->get($text, 'language') ?: danupe()->session()->old('language') ?: danupe()->language()->getLocale(), ['class' => 'form-select w-full']); ?>
     </div>
-
-    <div class="form-group">
-    </div>
-
 
     <?php echo danupe()->plugin('user', 'form')->submit('submit'); ?>
 </form>
