@@ -71,10 +71,10 @@ class TextController extends Controller
         $this->json(['total'=>$total,'data'=>$data]);
     }
 
-    public function edit($args)
+    public function edit($request, $id)
     {
         $text = new Text();
-        $text = $text->first(danupe()->data()->get($args, 'id'));
+        $text = $text->first($id);
         danupe()->view()->get('plugin-text', 'texts/edit', ['text' => $text, 'title' => 'Edit Text']);
 
     }
